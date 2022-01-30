@@ -45,14 +45,20 @@ def addVerb():
     verb2 = request.form["verb2"]
     verb3 = request.form["verb3"]
     translate = request.form[desc_translate]
+    verbtype = request.form["verbtype"]
     exp = request.form["explanation"]
     ET = database.EngTime()
-    result = ET.addVerb(verb1,verb2,verb3,translate,exp)
+    result = ET.addVerb(verb1,verb2,verb3,translate,verbtype,exp)
     if not result:
         return "ex"
     else:
         return "ok"
 
-
+@app.route('/randomverb',methods=['POST'])
+def randomverb():
+    verb_type = request.form["type"]
+    ET = database.EngTime()
+    result = ET.RandomVerbs(verb_type)
+    return result
 if __name__ == '__main__':
     app.run()

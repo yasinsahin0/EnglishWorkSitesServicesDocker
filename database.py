@@ -1,5 +1,5 @@
 import couchdb
-
+import random
 couch = couchdb.Server("http://admin:admin@194.195.246.167:5984/")
 
 
@@ -39,11 +39,12 @@ class EngTime():
                self.image:image}
         self.wordDatabaseEvery.save(doc)
         return True
-    def addVerb(self,verb1,verb2,verb3,translate,explanation):
+    def addVerb(self,verb1,verb2,verb3,translate,verbtype,explanation):
         doc = {"verb1":verb1,
                "verb2":verb2,
                "verb3":verb3,
                "translate":translate,
+               "type":verbtype,
                "explanation":explanation}
         self.verbs.save(doc)
         return True
@@ -144,10 +145,27 @@ class EngTime():
         self.sectenceFPT.save(doc)
         return True
 
-    def RandomVerbs(self):
-        return True
+    def RandomVerbs(self,type):
+
+        listem = []
+        a = 0
+        database = couch["verbs"]
+        for doc in database.find({"selector":{"type":type}}):
+            a +=1
+            lis = [doc["verb1"],doc["verb2"],doc["verb3"],doc["translate"],doc["type"],doc["explanation"]]
+            listem.append(lis)
+        rnd = random.randint(0,len(listem)-1)
+        parcaliste = listem[rnd]
+        res_dict ={"verb1":parcaliste[0],
+                   "verb2":parcaliste[1],
+                   "verb3":parcaliste[2],
+                   "translate":parcaliste[3],
+                   "type":parcaliste[4],
+                   "explanation":parcaliste[5]}
+        return res_dict
 
 ET = EngTime()
+# ET.RandomVerbs("regular")
 # print(ET.addWordsEveryday("a","b","c","d","e"))
 # print(ET.addWordsTechnical("a","b","c","d","e"))
 # print(ET.addSentenceSimplePresent("a","b","c","d"))
