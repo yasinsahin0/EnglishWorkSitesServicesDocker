@@ -7,6 +7,7 @@ class EngTime():
     def __init__(self):
 
         self.wordDatabaseEvery = couch["everydaywords"]
+        self.verbs = couch["verbs"]
         self.wordDatabaseTechnical = couch["technicalwords"]
         self.sectenceSPT = couch["simplepresenttense"]
         self.sectencePCT = couch["presentcontinuous"]
@@ -19,100 +20,132 @@ class EngTime():
         self.sectenceSFT = couch["simplefuture"]
         self.sectenceFCT = couch["futurecont"]
         self.sectenceFPT = couch["futureperfect"]
+        ### Descriptive
+        self.word = "word"
+        self.translate = "translate"
+        self.sentence1 = "sentence1"
+        self.sentence1Trans = "sentence1translate"
+        self.sentence2 = "sentence2"
+        self.sentence2Trans = "sentence2translate"
+        self.image = "image"
 
-    def addWordsEveryday(self,word,word2,word3,translate,image):
-        doc = {"word":word,
-               "word2":word2,
-               "word3":word3,
+    def addWordsEveryday(self,word,translate,sentence1,sentence1Trans,sentence2,sentence2Trans,image):
+        doc = {self.word:word,
+               self.translate:translate,
+               self.sentence1:sentence1,
+               self.sentence1Trans:sentence1Trans,
+               self.sentence2:sentence2,
+               self.sentence2Trans:sentence2Trans,
+               self.image:image}
+        self.wordDatabaseEvery.save(doc)
+        return True
+    def addVerb(self,verb1,verb2,verb3,translate,explanation):
+        doc = {"verb1":verb1,
+               "verb2":verb2,
+               "verb3":verb3,
                "translate":translate,
-               "image":image}
-        return self.wordDatabaseEvery.save(doc)
-
+               "explanation":explanation}
+        self.verbs.save(doc)
+        return True
     def addWordsTechnical(self,word,word2,word3,translate,image):
         doc = {"word":word,
                "word2":word2,
                "word3":word3,
                "translate":translate,
                "image":image}
-        return self.wordDatabaseTechnical.save(doc)
+        self.wordDatabaseTechnical.save(doc)
+        return True
 
     def addSentenceSimplePresent(self,sentence,translate,explanation,image):
         doc = {"sentence":sentence,
                "translate":translate,
                "explanation":explanation,
                "image":image}
-        return self.sectenceSPT.save(doc)
+        self.sectenceSPT.save(doc)
+        return True
 
     def addSentencePresentContinuous(self,sentence,translate,explanation,image):
         doc = {"sentence":sentence,
                "translate":translate,
                "explanation":explanation,
                "image":image}
-        return self.sectencePCT.save(doc)
+        self.sectencePCT.save(doc)
+        return True
 
     def addSentenceSimplePast(self,sentence,translate,explanation,image):
         doc = {"sentence":sentence,
                "translate":translate,
                "explanation":explanation,
                "image":image}
-        return self.sectenceSPASTT.save(doc)
+        self.sectenceSPASTT.save(doc)
+        return True
 
     def addSentencePastContinuous(self,sentence,translate,explanation,image):
         doc = {"sentence":sentence,
                "translate":translate,
                "explanation":explanation,
                "image":image}
-        return self.sectencePCONTT.save(doc)
+        self.sectencePCONTT.save(doc)
+        return True
 
     def addSentencePresentPerfect(self,sentence,translate,explanation,image):
         doc = {"sentence":sentence,
                "translate":translate,
                "explanation":explanation,
                "image":image}
-        return self.sectencePPT.save(doc)
+        self.sectencePPT.save(doc)
+        return True
 
     def addSentencePresentPerfectContinuous(self,sentence,translate,explanation,image):
         doc = {"sentence":sentence,
                "translate":translate,
                "explanation":explanation,
                "image":image}
-        return self.sectencePPCT.save(doc)
+        self.sectencePPCT.save(doc)
+        return True
 
     def addSentencePastPerfect(self,sentence,translate,explanation,image):
         doc = {"sentence":sentence,
                "translate":translate,
                "explanation":explanation,
                "image":image}
-        return self.sectencePPERFT.save(doc)
+        self.sectencePPERFT.save(doc)
+        return True
 
     def addSentencePastPerfectContinuous(self,sentence,translate,explanation,image):
         doc = {"sentence":sentence,
                "translate":translate,
                "explanation":explanation,
                "image":image}
-        return self.sectencePPCONTT.save(doc)
+        self.sectencePPCONTT.save(doc)
+        return True
 
     def addSentenceSimpleFuture(self,sentence,translate,explanation,image):
         doc = {"sentence":sentence,
                "translate":translate,
                "explanation":explanation,
                "image":image}
-        return self.sectenceSFT.save(doc)
+        self.sectenceSFT.save(doc)
+        return True
 
     def addSentenceFutureContinuous(self,sentence,translate,explanation,image):
         doc = {"sentence":sentence,
                "translate":translate,
                "explanation":explanation,
                "image":image}
-        return self.sectenceFCT.save(doc)
+        self.sectenceFCT.save(doc)
+        return True
 
     def addSentenceFuturePerfect(self,sentence,translate,explanation,image):
         doc = {"sentence":sentence,
                "translate":translate,
                "explanation":explanation,
                "image":image}
-        return self.sectenceFPT.save(doc)
+        self.sectenceFPT.save(doc)
+        return True
 
+    def RandomVerbs(self):
+        return True
 
 ET = EngTime()
 # print(ET.addWordsEveryday("a","b","c","d","e"))

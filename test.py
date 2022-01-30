@@ -15,5 +15,8 @@ def DatabaseTest():
     # couch.create('pastperfectcont')
     # couch.create('simplefuture')
     # couch.create('futurecont')
-    couch.create('futureperfect')
-DatabaseTest()
+    # couch.create('futureperfect')
+    return "OK."
+
+
+#DatabaseTest()
