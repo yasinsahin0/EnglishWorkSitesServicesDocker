@@ -60,5 +60,16 @@ def randomverb():
     ET = database.EngTime()
     result = ET.RandomVerbs(verb_type)
     return result
+
+@app.route('/controlverb',methods=['POST'])
+def controlverb():
+    verb = request.form["verb"]
+    ET = database.EngTime()
+    result = ET.controlVerb(verb)
+    if result:
+        return "var"
+    else:
+        return "yok"
+
 if __name__ == '__main__':
     app.run()

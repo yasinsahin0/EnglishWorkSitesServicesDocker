@@ -146,7 +146,6 @@ class EngTime():
         return True
 
     def RandomVerbs(self,type):
-
         listem = []
         a = 0
         database = couch["verbs"]
@@ -164,7 +163,13 @@ class EngTime():
                    "explanation":parcaliste[5]}
         return res_dict
 
+    def controlVerb(self,verb):
+        database = couch["verbs"]
+        for doc in database.find({"selector":{"verb1":verb}}):
+            return True
+        return False
 ET = EngTime()
+print(ET.controlVerb("be"))
 # ET.RandomVerbs("regular")
 # print(ET.addWordsEveryday("a","b","c","d","e"))
 # print(ET.addWordsTechnical("a","b","c","d","e"))
