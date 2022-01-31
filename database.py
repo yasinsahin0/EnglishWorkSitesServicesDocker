@@ -39,12 +39,16 @@ class EngTime():
                self.image:image}
         self.wordDatabaseEvery.save(doc)
         return True
-    def addVerb(self,verb1,verb2,verb3,translate,verbtype,explanation):
+    def addVerb(self,verb1,verb2,verb3,translate,verbtype,ex1,ex1translate,ex2,ex2translate,explanation):
         doc = {"verb1":verb1,
                "verb2":verb2,
                "verb3":verb3,
                "translate":translate,
                "type":verbtype,
+               "ex1":ex1,
+               "ex1translate":ex1translate,
+               "ex2":ex2,
+               "ex2translate":ex2translate,
                "explanation":explanation}
         self.verbs.save(doc)
         return True
@@ -151,7 +155,10 @@ class EngTime():
         database = couch["verbs"]
         for doc in database.find({"selector":{"type":type}}):
             a +=1
-            lis = [doc["verb1"],doc["verb2"],doc["verb3"],doc["translate"],doc["type"],doc["explanation"]]
+            lis = [doc["verb1"],doc["verb2"],doc["verb3"],doc["translate"],doc["type"],
+                   doc["ex1"],doc["ex1translate"],
+                   doc["ex2"],doc["ex2translate"],
+                   doc["explanation"]]
             listem.append(lis)
         rnd = random.randint(0,len(listem)-1)
         parcaliste = listem[rnd]
@@ -160,7 +167,11 @@ class EngTime():
                    "verb3":parcaliste[2],
                    "translate":parcaliste[3],
                    "type":parcaliste[4],
-                   "explanation":parcaliste[5]}
+                   "ex1":parcaliste[5],
+                   "ex1translate":parcaliste[6],
+                   "ex2":parcaliste[7],
+                   "ex2translate":parcaliste[8],
+                   "explanation":parcaliste[9]}
         return res_dict
 
     def controlVerb(self,verb):

@@ -46,9 +46,13 @@ def addVerb():
     verb3 = request.form["verb3"]
     translate = request.form[desc_translate]
     verbtype = request.form["verbtype"]
+    ex1 = request.form["ex1"]
+    ex1trans = request.form["ex1translate"]
+    ex2 = request.form["ex2"]
+    ex2trans = request.form["ex2translate"]
     exp = request.form["explanation"]
     ET = database.EngTime()
-    result = ET.addVerb(verb1,verb2,verb3,translate,verbtype,exp)
+    result = ET.addVerb(verb1,verb2,verb3,translate,verbtype,ex1,ex1trans,ex2,ex2trans,exp)
     if not result:
         return "ex"
     else:
