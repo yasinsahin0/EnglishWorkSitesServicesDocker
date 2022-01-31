@@ -22,23 +22,6 @@ def test():
     return "test"
 
 
-@app.route('/addWordsEveryday', methods=['POST'])
-def addWordsEveryday():
-    word = request.form[desc_word]
-    translate = request.form[desc_translate]
-    sentence1 = request.form[desc_sentence1]
-    sentence1Trans = request.form[desc_sentence1Trans]
-    sentence2 = request.form[desc_sentence2]
-    sentence2Trans = request.form[desc_sentence2Trans]
-    image = request.form[desc_image]
-    ET = database.EngTime()
-    result = ET.addWordsEveryday(word, translate, sentence1, sentence1Trans, sentence2, sentence2Trans, image)
-    if not result:
-        return "ex"
-    else:
-        return "ok"
-
-
 @app.route('/addVerb', methods=['POST'])
 def addVerb():
     verb1 = request.form["verb1"]
@@ -50,9 +33,11 @@ def addVerb():
     ex1trans = request.form["ex1translate"]
     ex2 = request.form["ex2"]
     ex2trans = request.form["ex2translate"]
-    exp = request.form["explanation"]
+    ex3 = request.form["ex3"]
+    ex3trans = request.form["ex3translate"]
     ET = database.EngTime()
-    result = ET.addVerb(verb1,verb2,verb3,translate,verbtype,ex1,ex1trans,ex2,ex2trans,exp)
+    result = ET.addVerb(verb1,verb2,verb3,translate,
+                        verbtype,ex1,ex1trans,ex2,ex2trans,ex3,ex3trans)
     if not result:
         return "ex"
     else:
