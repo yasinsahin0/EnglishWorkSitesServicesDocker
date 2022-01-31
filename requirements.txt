@@ -1,0 +1,4 @@
+Flask==2.0.2
+CouchDB==1.2
+PyPDF2==1.26.0
+reportlab==3.6.2
