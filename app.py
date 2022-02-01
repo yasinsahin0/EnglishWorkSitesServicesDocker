@@ -60,5 +60,36 @@ def controlverb():
     else:
         return "yok"
 
+@app.route('/addWord', methods=['POST'])
+def addWord():
+    word = request.form["word"]
+    translate = request.form["translate"]
+    ex1 = request.form["ex1"]
+    ex1trans = request.form["ex1t"]
+    ex2 = request.form["ex2"]
+    ex2trans = request.form["ex2t"]
+    ET = database.EngTime()
+    result = ET.addWord(word,translate,ex1,ex1trans,ex2,ex2trans)
+    if not result:
+        return "ex"
+    else:
+        return "ok"
+
+@app.route('/randomWord',methods=['POST'])
+def randomWord():
+    ET = database.EngTime()
+    result = ET.RandomWord()
+    return result
+
+@app.route('/controlWord',methods=['POST'])
+def controlWord():
+    word = request.form["word"]
+    ET = database.EngTime()
+    result = ET.controlWord(word)
+    if result:
+        return "var"
+    else:
+        return "yok"
+
 if __name__ == '__main__':
     app.run()

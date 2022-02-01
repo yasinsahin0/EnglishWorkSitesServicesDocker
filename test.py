@@ -20,3 +20,6 @@ def DatabaseTest():
 
 
 #DatabaseTest()
+
+a = "AbAsdaw"
+print(a.lower())
