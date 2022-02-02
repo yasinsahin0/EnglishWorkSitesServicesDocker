@@ -1,5 +1,6 @@
 import couchdb
-
+import database as db
+import random
 couch = couchdb.Server("http://admin:admin@194.195.246.167:5984/")
 
 def DatabaseTest():
@@ -21,5 +22,13 @@ def DatabaseTest():
 
 #DatabaseTest()
 
-a = "AbAsdaw"
-print(a.lower())
+#a = "AbAsdaw"
+#print(a.lower())
+
+ET = db.EngTime()
+
+#print(ET.GameRegularVerb())
+
+#for i in couch["technicalwords"]:
+#    for doc in couch["technicalwords"].find({"selector":{"_id":i}}):
+#        print(doc['word'])

@@ -52,7 +52,7 @@ class EngTime():
                    "ex2":main_list[rnd][7],
                    "ex2translate":main_list[rnd][8],
                    "ex3":main_list[rnd][9],
-                   "ex3translate":main_list[rnd][9]}
+                   "ex3translate":main_list[rnd][10]}
         return res_dict
 
     def controlVerb(self,verb):
@@ -60,6 +60,34 @@ class EngTime():
         for doc in database.find({"selector":{"verb1":verb.lower()}}):
             return True
         return False
+
+    def GameRegularVerb(self):
+        try:
+            onegame = self.RandomVerbs("regular")
+            twogame = self.RandomVerbs("regular")
+            treegame = self.RandomVerbs("regular")
+            doc ={"verb":onegame['verb1'],
+                  "t1":onegame['translate'],
+                  "t2":twogame['translate'],
+                  "t3":treegame['translate']}
+            return doc
+        except:
+            docx={}
+            return docx
+        
+    def GameirRegularVerb(self):
+        try:
+            onegame = self.RandomVerbs("irregular")
+            twogame = self.RandomVerbs("irregular")
+            treegame = self.RandomVerbs("irregular")
+            doc ={"verb":onegame['verb1'],
+                  "t1":onegame['translate'],
+                  "t2":twogame['translate'],
+                  "t3":treegame['translate']}
+            return doc
+        except:
+            docx={}
+            return docx
 
     def addWord(self,word,translate,ex1,ex1t,ex2,ex2t):
         doc = {"word":word.lower(),
@@ -96,10 +124,3 @@ class EngTime():
             return True
         return False
 
-#ET = EngTime()
-#print(ET.RandomWord())
-#print(ET.RandomVerbs("regular"))
-#print(ET.addWord("a","b","c","d","e","f"))
-#for i in couch["technicalwords"]:
-#    for doc in couch["technicalwords"].find({"selector":{"_id":i}}):
-#        print(doc['word'])

@@ -60,6 +60,16 @@ def controlverb():
     else:
         return "yok"
 
+@app.route('/gameRegularVerb',methods=['POST'])
+def gameRegularVerb():
+    ET = database.EngTime()
+    return ET.GameRegularVerb()
+
+@app.route('/gameirRegularVerb',methods=['POST'])
+def gameirRegularVerb():
+    ET = database.EngTime()
+    return ET.GameirRegularVerb()
+
 @app.route('/addWord', methods=['POST'])
 def addWord():
     word = request.form["word"]
