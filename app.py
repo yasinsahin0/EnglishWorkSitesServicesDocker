@@ -38,10 +38,10 @@ def addVerb():
     ET = database.EngTime()
     result = ET.addVerb(verb1,verb2,verb3,translate,
                         verbtype,ex1,ex1trans,ex2,ex2trans,ex3,ex3trans)
-    if not result:
-        return "ex"
-    else:
+    if result:
         return "ok"
+    else:
+        return "kayıt var"
 
 @app.route('/randomverb',methods=['POST'])
 def randomverb():

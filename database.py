@@ -11,19 +11,23 @@ class EngTime():
 
 
     def addVerb(self,verb1,verb2,verb3,translate,verb_type,ex1,ex1t,ex2,ex2t,ex3,ex3t):
-        doc = {"verb1":verb1.lower(),
-               "verb2":verb2.lower(),
-               "verb3":verb3.lower(),
-               "translate":translate.lower(),
-               "type":verb_type,
-               "ex1":ex1,
-               "ex1translate":ex1t,
-               "ex2":ex2,
-               "ex2translate":ex2t,
-               "ex3":ex3,
-               "ex3translate":ex3t}
-        self.verbs.save(doc)
-        return True
+        cntrlverb = self.controlVerb(verb1)
+        if not cntrlverb:
+            doc = {"verb1":verb1.lower(),
+                   "verb2":verb2.lower(),
+                   "verb3":verb3.lower(),
+                   "translate":translate.lower(),
+                   "type":verb_type,
+                   "ex1":ex1,
+                   "ex1translate":ex1t,
+                   "ex2":ex2,
+                   "ex2translate":ex2t,
+                   "ex3":ex3,
+                   "ex3translate":ex3t}
+            self.verbs.save(doc)
+            return True
+        else:
+            return False
 
 
     def RandomVerbs(self,type):
@@ -74,7 +78,7 @@ class EngTime():
         except:
             docx={}
             return docx
-        
+
     def GameirRegularVerb(self):
         try:
             onegame = self.RandomVerbs("irregular")
