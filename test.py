@@ -25,7 +25,7 @@ def DatabaseTest():
 #a = "AbAsdaw"
 #print(a.lower())
 
-ET = db.EngTime()
+#ET = db.EngTime()
 
 #print(ET.GameRegularVerb())
 

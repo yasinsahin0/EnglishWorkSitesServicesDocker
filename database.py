@@ -8,6 +8,7 @@ class EngTime():
 
         self.verbs = couch["verbs"]
         self.words = couch["technicalwords"]
+        self.everydaywords = couch["everydaywords"]
 
 
     def addVerb(self,verb1,verb2,verb3,translate,verb_type,ex1,ex1t,ex2,ex2t,ex3,ex3t):
@@ -70,10 +71,23 @@ class EngTime():
             onegame = self.RandomVerbs("regular")
             twogame = self.RandomVerbs("regular")
             treegame = self.RandomVerbs("regular")
+            fourgame = self.RandomVerbs("regular")
+
             doc ={"verb":onegame['verb1'],
-                  "t1":onegame['translate'],
-                  "t2":twogame['translate'],
-                  "t3":treegame['translate']}
+                  "real":onegame['translate']}
+
+            secimlistem =[onegame['translate'],
+                          twogame['translate'],
+                          treegame['translate'],
+                          fourgame['translate']]
+            a = 0
+            while True:
+                a +=1
+                rnd = random.randint(0,len(secimlistem)-1)
+                doc["t"+str(a)] = str(secimlistem[rnd])
+                secimlistem.pop(rnd)
+                if len(secimlistem) ==0:
+                    break
             return doc
         except:
             docx={}
@@ -93,13 +107,11 @@ class EngTime():
             docx={}
             return docx
 
-    def addWord(self,word,translate,ex1,ex1t,ex2,ex2t):
+    def addWord(self,word,translate,ex1,ex1t):
         doc = {"word":word.lower(),
                "translate":translate.lower(),
                "ex1":ex1,
-               "ex1translate":ex1t,
-               "ex2":ex2,
-               "ex2translate":ex2t}
+               "ex1translate":ex1t}
         self.words.save(doc)
         return True
 
@@ -111,20 +123,24 @@ class EngTime():
                 main_list.append([ doc["word"],
                                    doc["translate"],
                                    doc["ex1"],
-                                   doc["ex1translate"],
-                                   doc["ex2"],
-                                   doc["ex2translate"]])
+                                   doc["ex1translate"]])
         rnd = random.randint(0,len(main_list)-1)
         res_dict ={"word":main_list[rnd][0],
                    "translate":main_list[rnd][1],
                    "ex1":main_list[rnd][2],
-                   "ex1t":main_list[rnd][3],
-                   "ex2":main_list[rnd][4],
-                   "ex2t":main_list[rnd][5]}
+                   "ex1t":main_list[rnd][3]}
         return res_dict
 
     def controlWord(self,word):
         for doc in self.words.find({"selector":{"word":word.lower()}}):
             return True
         return False
+
+    def addEveryDayWord(self,word,translate,ex1,ex1t):
+        doc = {"word":word.lower(),
+               "translate":translate.lower(),
+               "ex1":ex1,
+               "ex1translate":ex1t}
+        self.everydaywords.save(doc)
+        return True
 

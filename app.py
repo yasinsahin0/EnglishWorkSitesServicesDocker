@@ -76,10 +76,8 @@ def addWord():
     translate = request.form["translate"]
     ex1 = request.form["ex1"]
     ex1trans = request.form["ex1t"]
-    ex2 = request.form["ex2"]
-    ex2trans = request.form["ex2t"]
     ET = database.EngTime()
-    result = ET.addWord(word,translate,ex1,ex1trans,ex2,ex2trans)
+    result = ET.addWord(word,translate,ex1,ex1trans)
     if not result:
         return "ex"
     else:
@@ -100,6 +98,19 @@ def controlWord():
         return "var"
     else:
         return "yok"
+
+@app.route('/addEveryDayWord', methods=['POST'])
+def addEveryDayWord():
+    word = request.form["word"]
+    translate = request.form["translate"]
+    ex1 = request.form["ex1"]
+    ex1trans = request.form["ex1t"]
+    ET = database.EngTime()
+    result = ET.addEveryDayWord(word,translate,ex1,ex1trans)
+    if not result:
+        return "ex"
+    else:
+        return "ok"
 
 if __name__ == '__main__':
     app.run()
