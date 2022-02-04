@@ -128,5 +128,63 @@ def controlEveryDayWord():
     else:
         return "yok"
 
+@app.route('/addAdjectives', methods=['POST'])
+def addAdjectives():
+    adjectives = request.form["adjectives"]
+    translate = request.form["translate"]
+    ex1 = request.form["ex1"]
+    ex1trans = request.form["ex1t"]
+    ET = database.EngTime()
+    result = ET.addAdjectives(adjectives,translate,ex1,ex1trans)
+    if not result:
+        return "ex"
+    else:
+        return "ok"
+
+@app.route('/randomAdjectives',methods=['POST'])
+def randomAdjectives():
+    ET = database.EngTime()
+    result = ET.RandomAdjectives()
+    return result
+
+@app.route('/controlAdjectives',methods=['POST'])
+def controlAdjectives():
+    adjectives = request.form["adjectives"]
+    ET = database.EngTime()
+    result = ET.controlAdjectives(adjectives)
+    if result:
+        return "var"
+    else:
+        return "yok"
+
+@app.route('/addVocabulary', methods=['POST'])
+def addVocabulary():
+    vocabulary = request.form["vocabulary"]
+    translate = request.form["translate"]
+    ex1 = request.form["ex1"]
+    ex1trans = request.form["ex1t"]
+    ET = database.EngTime()
+    result = ET.addVocabulary(vocabulary,translate,ex1,ex1trans)
+    if not result:
+        return "ex"
+    else:
+        return "ok"
+
+@app.route('/randomVocabulary',methods=['POST'])
+def randomVocabulary():
+    ET = database.EngTime()
+    result = ET.RandomVocabulary()
+    return result
+
+@app.route('/controlVocabulary',methods=['POST'])
+def controlVocabulary():
+    vocabulary = request.form["vocabulary"]
+    ET = database.EngTime()
+    result = ET.controlVocabulary(vocabulary)
+    if result:
+        return "var"
+    else:
+        return "yok"
+
 if __name__ == '__main__':
     app.run()

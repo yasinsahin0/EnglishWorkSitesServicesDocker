@@ -9,7 +9,8 @@ class EngTime():
         self.verbs = couch["verbs"]
         self.words = couch["technicalwords"]
         self.everydaywords = couch["everydaywords"]
-
+        self.adjectives = couch["adjectives"]
+        self.vocabulary = couch["vocabulary"]
 
     def addVerb(self,verb1,verb2,verb3,translate,verb_type,ex1,ex1t,ex2,ex2t,ex3,ex3t):
         cntrlverb = self.controlVerb(verb1)
@@ -161,5 +162,67 @@ class EngTime():
 
     def controlEveryDayWord(self,word):
         for doc in self.everydaywords.find({"selector":{"word":word.lower()}}):
+            return True
+        return False
+
+    def addAdjectives(self,adjectives,translate,ex1,ex1t):
+        if not self.controlAdjectives(adjectives):
+            doc = {"adjectives":adjectives.lower(),
+                   "translate":translate.lower(),
+                   "ex1":ex1,
+                   "ex1translate":ex1t}
+            self.adjectives.save(doc)
+            return True
+        else:
+            return False
+
+    def RandomAdjectives(self):
+        main_list = []
+        for i in self.adjectives:
+            for doc in self.adjectives.find({"selector":{"_id":i}}):
+                main_list.append([ doc["adjectives"],
+                                   doc["translate"],
+                                   doc["ex1"],
+                                   doc["ex1translate"]])
+        rnd = random.randint(0,len(main_list)-1)
+        res_dict ={"adjectives":main_list[rnd][0],
+                   "translate":main_list[rnd][1],
+                   "ex1":main_list[rnd][2],
+                   "ex1t":main_list[rnd][3]}
+        return res_dict
+
+    def controlAdjectives(self,adjectives):
+        for doc in self.adjectives.find({"selector":{"adjectives":adjectives.lower()}}):
+            return True
+        return False
+
+    def addVocabulary(self,vocabulary,translate,ex1,ex1t):
+        if not self.controlVocabulary(vocabulary):
+            doc = {"vocabulary":vocabulary.lower(),
+                   "translate":translate.lower(),
+                   "ex1":ex1,
+                   "ex1translate":ex1t}
+            self.vocabulary.save(doc)
+            return True
+        else:
+            return False
+
+    def RandomVocabulary(self):
+        main_list = []
+        for i in self.vocabulary:
+            for doc in self.vocabulary.find({"selector":{"_id":i}}):
+                main_list.append([ doc["vocabulary"],
+                                   doc["translate"],
+                                   doc["ex1"],
+                                   doc["ex1translate"]])
+        rnd = random.randint(0,len(main_list)-1)
+        res_dict ={"vocabulary":main_list[rnd][0],
+                   "translate":main_list[rnd][1],
+                   "ex1":main_list[rnd][2],
+                   "ex1t":main_list[rnd][3]}
+        return res_dict
+
+    def controlVocabulary(self,vocabulary):
+        for doc in self.vocabulary.find({"selector":{"vocabulary":vocabulary.lower()}}):
             return True
         return False
