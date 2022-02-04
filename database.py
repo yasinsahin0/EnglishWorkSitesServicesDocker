@@ -144,3 +144,22 @@ class EngTime():
         self.everydaywords.save(doc)
         return True
 
+    def RandomEveryDayWord(self):
+        main_list = []
+        for i in self.everydaywords:
+            for doc in self.everydaywords.find({"selector":{"_id":i}}):
+                main_list.append([ doc["word"],
+                                   doc["translate"],
+                                   doc["ex1"],
+                                   doc["ex1translate"]])
+        rnd = random.randint(0,len(main_list)-1)
+        res_dict ={"word":main_list[rnd][0],
+                   "translate":main_list[rnd][1],
+                   "ex1":main_list[rnd][2],
+                   "ex1t":main_list[rnd][3]}
+        return res_dict
+
+    def controlEveryDayWord(self,word):
+        for doc in self.everydaywords.find({"selector":{"word":word.lower()}}):
+            return True
+        return False

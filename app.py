@@ -112,5 +112,21 @@ def addEveryDayWord():
     else:
         return "ok"
 
+@app.route('/randomEveryDayWord',methods=['POST'])
+def randomEveryDayWord():
+    ET = database.EngTime()
+    result = ET.RandomEveryDayWord()
+    return result
+
+@app.route('/controlEveryDayWord',methods=['POST'])
+def controlEveryDayWord():
+    word = request.form["word"]
+    ET = database.EngTime()
+    result = ET.controlEveryDayWord(word)
+    if result:
+        return "var"
+    else:
+        return "yok"
+
 if __name__ == '__main__':
     app.run()
