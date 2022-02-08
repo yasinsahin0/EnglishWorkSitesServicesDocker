@@ -11,6 +11,7 @@ class EngTime():
         self.everydaywords = couch["everydaywords"]
         self.adjectives = couch["adjectives"]
         self.vocabulary = couch["vocabulary"]
+        self.nouns = couch["nouns"]
 
     def addVerb(self,verb1,verb2,verb3,translate,verb_type,ex1,ex1t,ex2,ex2t,ex3,ex3t):
         cntrlverb = self.controlVerb(verb1)
@@ -224,5 +225,36 @@ class EngTime():
 
     def controlVocabulary(self,vocabulary):
         for doc in self.vocabulary.find({"selector":{"vocabulary":vocabulary.lower()}}):
+            return True
+        return False
+
+    def addNouns(self,nouns,translate,ex1,ex1t):
+        if not self.controlNouns(nouns):
+            doc = {"nouns":nouns.lower(),
+                   "translate":translate.lower(),
+                   "ex1":ex1,
+                   "ex1translate":ex1t}
+            self.nouns.save(doc)
+            return True
+        else:
+            return False
+
+    def RandomNouns(self):
+        main_list = []
+        for i in self.nouns:
+            for doc in self.nouns.find({"selector":{"_id":i}}):
+                main_list.append([ doc["nouns"],
+                                   doc["translate"],
+                                   doc["ex1"],
+                                   doc["ex1translate"]])
+        rnd = random.randint(0,len(main_list)-1)
+        res_dict ={"nouns":main_list[rnd][0],
+                   "translate":main_list[rnd][1],
+                   "ex1":main_list[rnd][2],
+                   "ex1t":main_list[rnd][3]}
+        return res_dict
+
+    def controlNouns(self,nouns):
+        for doc in self.nouns.find({"selector":{"nouns":nouns.lower()}}):
             return True
         return False

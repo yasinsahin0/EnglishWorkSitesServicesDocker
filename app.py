@@ -186,5 +186,35 @@ def controlVocabulary():
     else:
         return "yok"
 
+@app.route('/addNouns', methods=['POST'])
+def addNouns():
+    nouns = request.form["nouns"]
+    translate = request.form["translate"]
+    ex1 = request.form["ex1"]
+    ex1trans = request.form["ex1t"]
+    ET = database.EngTime()
+    result = ET.addNouns(nouns,translate,ex1,ex1trans)
+    if not result:
+        return "ex"
+    else:
+        return "ok"
+
+@app.route('/randomNouns',methods=['POST'])
+def randomNouns():
+    ET = database.EngTime()
+    result = ET.RandomNouns()
+    return result
+
+@app.route('/controlNouns',methods=['POST'])
+def controlNouns():
+    nouns = request.form["nouns"]
+    ET = database.EngTime()
+    result = ET.controlNouns(nouns)
+    if result:
+        return "var"
+    else:
+        return "yok"
+
+
 if __name__ == '__main__':
     app.run()
