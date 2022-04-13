@@ -1,6 +1,6 @@
 import couchdb
 import random
-couch = couchdb.Server("http://admin:admin@194.195.246.167:5984/")
+couch = couchdb.Server("http://admin:test@125.125.125.125:5984/")
 
 
 class EngTime():
