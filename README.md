@@ -1,7 +1,6 @@
 # EnglishTime
 
->docker build -t engtime .
+>docker build -t engwork .
   
->docker run -d -p 5000:5000 imgid
+>docker run -d -p port:port <imageid>
 
->git clone https://yasinsahin0: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@github.com/yasinsahin0/EnglishTime.git
